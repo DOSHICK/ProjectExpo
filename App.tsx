@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TaskListScreen from './src/screens/TaskListScreen';
+import TaskDetailScreen from './src/screens/TaskDetailScreen';
+import AddTaskScreen from './src/screens/AddTaskScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName='TaskList'>
+                <Stack.Screen
+                    name='TaskList' 
+                    component={TaskListScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen name='TaskDetail' component={TaskDetailScreen} options={{ title: 'TaskDetail' }} />
+                <Stack.Screen name='AddTask' component={AddTaskScreen} options={{ title: 'AddTask' }} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
